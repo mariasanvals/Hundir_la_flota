@@ -7,10 +7,10 @@ def disparo(tablero,jugador):
     valido=False
     while not valido:
         if jugador=="Maquina":
-            posicion=(random.randint(0, tab.dimension-1),random.randint(0, tab.dimension-1))
+            posicion=(random.randint(0, tablero.dimension-1),random.randint(0, tablero.dimension-1))
         else:
             posicion=tuple(int(x) for x in input("Introduce las coordenadas donde quieres disparar separadas por una coma").split(","))
-        valido=posible_disparo(tablero,posicion)
+        valido=tablero.posible_disparo(posicion)
     dado=tablero.disparo(posicion)
     print("Disparando...")
     if dado:
@@ -21,12 +21,12 @@ def disparo(tablero,jugador):
             print("\n¡BOOM! TOCADO! Has impactado en un barco de la máquina.\n\n¡Te sigue tocando!")
     else:
         if jugador=="Maquina":
-            turno="Maquina"
+            turno="player"
             print("\n¡Ha fallado! Nos vuelve a tocar")
         else:
-            turno="player"
+            turno="Maquina"
             print("\n¡AGUA! Has fallado. Le toca a la maquina")
-    if tablero.vidas():
+    if tablero.vivo():
         return turno
     else:
         if jugador=="Maquina":
@@ -67,13 +67,13 @@ def posicion_correcta_notexto(tablero,posicion,orientacion,n):
         if i<0 or i>tablero.dimension-1 or j<0 or j>tablero.dimension-1:
             correcta=False
         else:
-            if orientacion=="N" and j-n+1<0:
+            if orientacion=="N" and i-n+1<0:
                 correcta=False
-            elif orientacion=="S" and j+n-1>tablero.dimension:
+            elif orientacion=="S" and i+n-1>tablero.dimension:
                 correcta=False
-            elif orientacion=="E" and i+n-1>tablero.dimension:
+            elif orientacion=="E" and j+n-1>tablero.dimension:
                 correcta=False
-            elif orientacion=="O" and i-n+1<0:
+            elif orientacion=="O" and j-n+1<0:
                 correcta=False
         return correcta
 
@@ -82,10 +82,10 @@ def crear_barco(tablero,n,aleatorio=False):
         while not valido:
             if aleatorio==True:
                 orientacion=random.choice(ORIENTACIONES)
-                posicion=(random.randint(0, tab.dimension-1),random.randint(0, tab.dimension-1))
+                posicion=(random.randint(0, tablero.dimension-1),random.randint(0, tablero.dimension-1))
                 while not posicion_correcta_notexto(tablero,posicion,orientacion,n):
                     posicion=(random.randint(0, tablero.dimension-1),random.randint(0, tablero.dimension-1))
-                posiciones=[(random.randint(0, tablero.dimension-1),random.randint(0, tablero.dimension-1))]
+                
                     
             else:
                 posicion=tuple(int(x) for x in input("Introduce las coordenadas del barco separadas por una coma").split(","))
@@ -96,10 +96,10 @@ def crear_barco(tablero,n,aleatorio=False):
                 while not posicion_correcta(tablero,posicion,orientacion,n) or orientacion not in ORIENTACIONES:
                     posicion=tuple(int(x) for x in input("Introduce las coordenadas del barco separadas por una coma").split(","))  
                     if n==1:
-                        rientacion="N"
+                        orientacion="N"
                     else:
                         orientacion=input("Introduce la orientación del barco ('N','S','E','O')").upper()
-                posiciones=[posicion]
+            posiciones=[posicion]
             for i in range(n-1):
                 if orientacion=="N":
                     nueva_posi=(posiciones[-1][0]-1,posiciones[-1][1])

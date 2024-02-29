@@ -6,5 +6,6 @@ AGUA = ' '
 BARCO = 'O'
 TOCADO = 'X'
 
+
 # Orientaciones de los barcos
 ORIENTACIONES = ("N", "S", "E", "O") 

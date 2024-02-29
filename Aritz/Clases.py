@@ -9,6 +9,7 @@ class Tablero :
         self.vidas=0
         self.dimension=10
         self.tablero=np.full((self.dimension, self.dimension), " ")
+        self.tablero_disparos=np.full((self.dimension, self.dimension), " ")
     
     def mostrar_tablero(self):
         print(self.tablero)
@@ -22,7 +23,7 @@ class Tablero :
         i=posicion[0]
         j=posicion[1]
         if i>0 and i<self.dimension-1 and j>0 and j<self.dimension-1:
-            return (self.tablero[posicion]!="X")
+            return (self.tablero_disparos[posicion]!="X")
         else:
             return False
     
@@ -35,7 +36,7 @@ class Tablero :
             return False
         
     def vivo(self):
-        return (not vidas==0)
+        return (not self.vidas==0)
     
     
 
