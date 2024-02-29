@@ -2,6 +2,7 @@
 
 ORIENTATIONS = ("N", "S", "E", "O") 
 DIMENSIONES = (10,10)
+"""
 BARCOS = {
     "barco_1_1": 1,
     "barco_1_2": 1,
@@ -14,6 +15,7 @@ BARCOS = {
     "barco_3_2": 3,
     "barco_4_1": 4,
 }
+"""
 
 CHARTAB = {
     "boat": "O",
