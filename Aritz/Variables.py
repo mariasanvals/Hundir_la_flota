@@ -5,6 +5,7 @@ dim_TABLERO = 10
 AGUA = ' '
 BARCO = 'O'
 TOCADO = 'X'
+TIRO_AGUA = "-"
 
 
 # Orientaciones de los barcos

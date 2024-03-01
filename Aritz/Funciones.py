@@ -3,37 +3,43 @@ import random
 
 from Variables import *
 
-def disparo(tablero,jugador):
+def disparo(tablero):
+    print("El tablero es de", tablero.id)
     valido=False
     while not valido:
-        if jugador=="Maquina":
+        if tablero.id=="Jugador":
             posicion=(random.randint(0, tablero.dimension-1),random.randint(0, tablero.dimension-1))
         else:
-            posicion=tuple(int(x) for x in input("Introduce las coordenadas donde quieres disparar separadas por una coma").split(","))
+            posicion=tuple(int(x) for x in input("Introduce las coordenadas donde quieres disparar separadas por una coma: ").split(","))
         valido=tablero.posible_disparo(posicion)
     dado=tablero.disparo(posicion)
     print("Disparando...")
     if dado:
-        turno=jugador
-        if jugador=="Maquina":
-            print("\nNOS HA IMPACTADO DE LLENO!!! Le vuelve a tocar a la maquina")
+        if tablero.id=="Jugador":
+            print("\nNOS HA IMPACTADO DE LLENO!!! Le vuelve a tocar a la maquina. Nos quedan ",tablero.vidas, "vidas.")
+            turno="Maquina"
         else:
-            print("\n¡BOOM! TOCADO! Has impactado en un barco de la máquina.\n\n¡Te sigue tocando!")
+            print("\n¡BOOM! TOCADO! Has impactado en un barco de la máquina.\n\n¡Te sigue tocando! Le quedan ",tablero.vidas, "vidas.")
+            turno="Jugador"
     else:
-        if jugador=="Maquina":
-            turno="player"
+        if tablero.id=="Jugador":
+            turno="Jugador"
             print("\n¡Ha fallado! Nos vuelve a tocar")
         else:
             turno="Maquina"
             print("\n¡AGUA! Has fallado. Le toca a la maquina")
     if tablero.vivo():
+        print("El turno es de",turno)
         return turno
     else:
-        if jugador=="Maquina":
+        if tablero.id=="Jugador":
             print("\n¡LOSER! Has palmado. Tienes que practicar un poco más")
         else:
             print("\n¡GANASTE! Enhorabuena, eres un auténtico grumete!")
         return "Fin"
+
+#def repite_turno(jugador:str,acertado:bool):
+    #if acertado = True:
     
 
 
@@ -46,16 +52,16 @@ def posicion_correcta(tablero,posicion,orientacion,n):
             print("La posición indicada está fuera del tablero")
             correcta=False
         else:
-            if orientacion=="N" and j-n+1<0:
+            if orientacion=="N" and i-n+1<0:
                 print("El barco se sale del tablero")
                 correcta=False
-            elif orientacion=="S" and j+n-1>tablero.dimension:
+            elif orientacion=="S" and i+n-1>tablero.dimension:
                 print("El barco se sale del tablero")
                 correcta=False
-            elif orientacion=="E" and i+n-1>tablero.dimension:
+            elif orientacion=="E" and j+n-1>tablero.dimension:
                 print("El barco se sale del tablero")
                 correcta=False
-            elif orientacion=="O" and i-n+1<0:
+            elif orientacion=="O" and j-n+1<0:
                 print("El barco se sale del tablero")
                 correcta=False
         return correcta
@@ -88,17 +94,17 @@ def crear_barco(tablero,n,aleatorio=False):
                 
                     
             else:
-                posicion=tuple(int(x) for x in input("Introduce las coordenadas del barco separadas por una coma").split(","))
+                posicion=tuple(int(x) for x in input("Introduce las coordenadas del barco separadas por una coma: ").split(","))
                 if n==1:
                     orientacion="N"
                 else:
-                    orientacion=input("Introduce la orientación del barco ('N','S','E','O')").upper()
+                    orientacion=input("Introduce la orientación del barco ('N','S','E','O'): ").upper()
                 while not posicion_correcta(tablero,posicion,orientacion,n) or orientacion not in ORIENTACIONES:
-                    posicion=tuple(int(x) for x in input("Introduce las coordenadas del barco separadas por una coma").split(","))  
+                    posicion=tuple(int(x) for x in input("Introduce las coordenadas del barco separadas por una coma: ").split(","))  
                     if n==1:
                         orientacion="N"
                     else:
-                        orientacion=input("Introduce la orientación del barco ('N','S','E','O')").upper()
+                        orientacion=input("Introduce la orientación del barco ('N','S','E','O'): ").upper()
             posiciones=[posicion]
             for i in range(n-1):
                 if orientacion=="N":
@@ -119,7 +125,8 @@ def crear_barco(tablero,n,aleatorio=False):
                     c+=1
             if c==n:
                 valido=True
-        
+
+                        
         tablero.añadir_barco(posiciones)
         
         

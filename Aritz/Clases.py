@@ -5,7 +5,8 @@ from Variables import *
 
 class Tablero :
 
-    def __init__(self) :
+    def __init__(self,identificacion):
+        self.id=identificacion
         self.vidas=0
         self.dimension=10
         self.tablero=np.full((self.dimension, self.dimension), " ")
@@ -22,8 +23,8 @@ class Tablero :
     def posible_disparo(self,posicion):
         i=posicion[0]
         j=posicion[1]
-        if i>0 and i<self.dimension-1 and j>0 and j<self.dimension-1:
-            return (self.tablero_disparos[posicion]!="X")
+        if i>=0 and i<self.dimension and j>=0 and j<self.dimension:
+            return (self.tablero_disparos[posicion]!="X" or self.tablero_disparos[posicion]!="-")
         else:
             return False
     
@@ -33,6 +34,7 @@ class Tablero :
             self.vidas-=1
             return True
         else:
+            self.tablero[posicion]==TIRO_AGUA
             return False
         
     def vivo(self):
