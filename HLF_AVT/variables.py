@@ -1,15 +1,13 @@
-import numpy as np
-import random
+# Tamaño del tablero
+dim_TABLERO = 10
 
-dimension = (10,10)
-
-# carac_agua = 1
-# disparo_agua = 2
-# superficie_barco = 3
-# disparo_barco = 4
-
+# Símbolos del tablero
 
 agua = "~"
-barco = "O"
-disparo_barco = "*"
-disparo_agua = "·"
+barco = "⛴︎"
+tocado = "✴︎"
+fallido = "▪︎"
+
+
+# Orientaciones de los barcos
+ORIENTACIONES = ("N", "S", "E", "O") 
