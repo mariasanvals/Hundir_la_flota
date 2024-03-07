@@ -30,10 +30,6 @@ print(tabl_j2.tablero_ini)
 
 print(MENSAJES["intro3"])
 
-# Establecemos el numero de vidas
-vidas_j1 = np.count_nonzero(tabl_j1.tablero == "O")
-vidas_j2 = vidas_j1
-
 # Escoge dificultad
 dificultad = int(input(MENSAJES["intro4"]))
 
@@ -42,7 +38,7 @@ while True:
 
     # Menu del juego en el que el jugador elige opcion
     coor = input(MENSAJES["turno1"])
-    #os.system('cls')
+    os.system('cls')
     # Si quiere salir
     if coor.lower() == 'salir':
         print(MENSAJES["salir"])
@@ -61,12 +57,11 @@ while True:
     elif coor.lower() == 'tmb':
         print(tabl_j2.tablero)
         continue
-
+    
     # Si no se da ninguno de los casos anteriores, suponemos que es una coordenada
     try:
         coor = clean_coors(coor)
     except:
-        
         # No ha introducido una coordenada correcta
         print(coor, "no se considera como coordenada.\
          \nPor favor, introduce de nuevo una coordenada en formato 'fila.columna' ")
@@ -108,8 +103,7 @@ while True:
 
             # Disparo aleatorio de la maquina
             coor_maq = choose_coor(tabl_j1, dificultad)
-            coor_maq[0]+=1
-            coor_maq[1]+=1
+            
 
             # Comprobamos si nos da
             tocado_maq = tabl_j1.check_coor(coor_maq)
