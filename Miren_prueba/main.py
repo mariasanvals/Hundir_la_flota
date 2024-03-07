@@ -7,11 +7,14 @@ El programa se in inicializa posicionando los barcos de ambos jugadores aleatori
 # Importamos librerias
 import numpy as np
 import time
+import os
+
 
 # Importamos modulos propios
 from clases import Tablero
 from funciones import clean_coors, choose_coor
 from variables import DIMENSIONES, BARCOS, MENSAJES
+
 
 # Se posicionan los barcos del jugador 1
 print(MENSAJES["intro1"])
@@ -64,11 +67,18 @@ while True:
     try:
         coor = clean_coors(coor)
     except:
+        
         # No ha introducido una coordenada correcta
         print(coor, "no se considera como coordenada.\
          \nPor favor, introduce de nuevo una coordenada en formato 'fila.columna' ")
         continue
-
+    # Comprobamos si la coordenada está dentro del tablero y si no es una coordenada repetida
+    if not coors_right(coor,tabl_j2.tablero_ini):
+        
+        print(coor,"no es una coordenada valida.\
+              \n Por favor introduce una coordenada nueva: ")
+        continue
+    
     # Comprobamos si j1 impacta en j2
     tocado = tabl_j2.check_coor(coor)
 

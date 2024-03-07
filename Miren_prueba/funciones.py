@@ -16,6 +16,19 @@ def clean_coors(coors):
     return (fila, col)
 
 
+def coors_right(coors,tablero):
+    '''
+    Comprobamos si la coordenada introducida es válida.
+    '''
+    valido=True
+    fila = coors[0]
+    col = coors[1]
+    if fila not in range(1,11) or col not in range(1,11):
+        valido=False
+    elif tablero[fila-1,col-1]==CHARTAB["hit"] or tablero[fila-1,col-1]==CHARTAB["fail"]:
+        valido=False
+    return valido
+
 def choose_coor(tablero, dificultad):
     '''
     La maquina escoge una coordenada de disparo en funcion de la dificultad del juego
