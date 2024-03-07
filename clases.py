@@ -2,7 +2,7 @@
 
 import numpy as np
 import random
-from Hundir_la_flota.variables import ORIENTATIONS, DIMENSIONES, BARCOS, CHARTAB
+from variables import ORIENTATIONS, DIMENSIONES, BARCOS, CHARTAB
 
 class Tablero:
     '''
@@ -26,13 +26,16 @@ class Tablero:
 
         # Diccionario de barcos
         self.barcos = barcos
-
+        
         # Tablero para rellenar de barcos
         self.tablero = np.full(fill_value = CHARTAB["water"], shape = dimensiones)
+        #Añadimos las coordenadas al tablero
+        self.tablero=np.column_stack((np.vstack((self.tablero,np.arange(1,11))),np.append(np.arange(1,11),0)))
 
         # Tablero para usar en el juego, todo con agua
         self.tablero_ini = np.full(fill_value = CHARTAB["water"], shape = dimensiones)
-
+         #Añadimos las coordenadas al tablero
+        self.tablero_ini=np.column_stack((np.vstack((self.tablero_ini,np.arange(1,11))),np.append(np.arange(1,11),0)))
 
     
     def inicializa_tablero(self):
