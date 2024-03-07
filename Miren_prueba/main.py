@@ -42,12 +42,11 @@ while True:
 
     # Menu del juego en el que el jugador elige opcion
     coor = input(MENSAJES["turno1"])
-    os.system('cls')
+    #os.system('cls')
     # Si quiere salir
     if coor.lower() == 'salir':
         print(MENSAJES["salir"])
         break
-
     # Si quiere ver su tablero
     elif coor.lower() == 'mt':
         print(tabl_j1.tablero)
