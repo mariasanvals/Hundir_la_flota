@@ -18,7 +18,6 @@ def disparo(tablero):
     if dado:
         if tablero.id=="Jugador":
             print("\nNOS HA IMPACTADO DE LLENO!!! Le vuelve a tocar a la maquina. Nos quedan ",tablero.vidas, "vidas.")
-            tablero.mostrar_disparo(posicion)
             turno="Maquina"
         else:
             print("\n¡BOOM! TOCADO! Has impactado en un barco de la máquina.\n\n¡Te sigue tocando! Le quedan ",tablero.vidas, "vidas.")
@@ -28,7 +27,6 @@ def disparo(tablero):
         if tablero.id=="Jugador":
             turno="Jugador"
             print("\n¡Ha fallado! Nos vuelve a tocar")
-            tablero.mostrar_disparo(posicion)
         else:
             turno="Maquina"
             print("\n¡AGUA! Has fallado. Le toca a la maquina")

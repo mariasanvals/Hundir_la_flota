@@ -11,16 +11,13 @@ class Tablero :
         self.dimension=10
         self.tablero=np.full((self.dimension, self.dimension), vs.agua)
         self.tablero_disparos=np.full((self.dimension, self.dimension), vs.agua)
+        self.paco=Pintor() # Paco nos ayuda a ver el mundo mas bonito :)
     
     def mostrar_tablero(self):
-        print(self.tablero)
+        self.paco.pintar_tablero(self.tablero)
 
     def mostrar_tablero_disparos(self):
-        coordenada_x = np.array([[0,1,2,3,4,5,6,7,8,9]])
-        coordenada_y = np.transpose([[0,1,2,3,4,5,6,7,8,9,"-"]])
-        tab_1 = np.vstack((self.tablero_disparos,coordenada_x))
-        tab_2 = np.column_stack((tab_1,coordenada_y))
-        print(tab_2)
+        self.paco.pintar_tablero(self.tablero_disparos)
 
     def añadir_barco(self,posiciones):
         for posicion in posiciones:
@@ -44,19 +41,27 @@ class Tablero :
     
     def disparo(self,posicion):
         if self.tablero[posicion]==vs.barco:
-            self.tablero[posicion]==vs.tocado
+            self.tablero[posicion]=vs.tocado
             self.vidas-=1
             return True
         else:
-            self.tablero[posicion]==vs.fallido
-            return False
-        
-    def mostrar_disparo(self,posicion):
-        if self.tablero[posicion]==vs.barco:
-            self.tablero[posicion]=vs.tocado
-        else:
             self.tablero[posicion]=vs.fallido
+            return False
             
     def vivo(self):
         return (not self.vidas==0)   
 
+class Pintor:
+
+    def pintar_tablero(self, tablero):
+        i = 0
+        for fila in tablero:
+            linea = ""
+            for celda in fila:
+                linea += celda + " "
+            print(linea + str(i))
+            i += 1
+        lineax = ""
+        for i in range(10):
+            lineax += str(i) + " "
+        print(lineax + "+")
