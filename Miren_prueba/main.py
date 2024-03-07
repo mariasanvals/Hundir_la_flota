@@ -12,7 +12,7 @@ import os
 
 # Importamos modulos propios
 from clases import Tablero
-from funciones import clean_coors, choose_coor
+from funciones import *
 from variables import DIMENSIONES, BARCOS, MENSAJES
 
 
@@ -42,7 +42,7 @@ while True:
 
     # Menu del juego en el que el jugador elige opcion
     coor = input(MENSAJES["turno1"])
-
+    os.system('cls')
     # Si quiere salir
     if coor.lower() == 'salir':
         print(MENSAJES["salir"])
@@ -72,11 +72,12 @@ while True:
         print(coor, "no se considera como coordenada.\
          \nPor favor, introduce de nuevo una coordenada en formato 'fila.columna' ")
         continue
+
     # Comprobamos si la coordenada está dentro del tablero y si no es una coordenada repetida
     if not coors_right(coor,tabl_j2.tablero_ini):
         
         print(coor,"no es una coordenada valida.\
-              \n Por favor introduce una coordenada nueva: ")
+              \nPor favor introduce una coordenada nueva: ")
         continue
     
     # Comprobamos si j1 impacta en j2

@@ -1,4 +1,5 @@
 
+from variables import ORIENTATIONS, DIMENSIONES, BARCOS, CHARTAB
 
 import numpy as np
 
